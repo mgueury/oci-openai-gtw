@@ -27,11 +27,19 @@ sed -i "s&AUTH_TYPE = \"API_KEY\"&AUTH_TYPE = \"INSTANCE_PRINCIPAL\"&" config.py
 
 # COMPARTMENT
 sed -i '/^PORT =.*/i import os\n' config.py
-# Commenting the region -> Use models.yaml
-sed -i "s&OCI_COMPARTMENT = \"ocid1.compartment.oc1..xxx\"&# OCI_COMPARTMENT = os.environ['TF_VAR_compartment_ocid']&" config.py
 sed -i "s&REGION = .*&# REGION = os.environ['TF_VAR_region']&" config.py
+
+if [ "$TF_VAR_use_models_yaml" == "true" ];
+  # OCI_COMPARTMENT = "" -> Use models.yaml
+  sed -i "s&OCI_COMPARTMENT = \"ocid1.compartment.oc1..xxx\"&OCI_COMPARTMENT = ""&" config.py
+else
+  sed -i "s&OCI_COMPARTMENT = \"ocid1.compartment.oc1..xxx\"&OCI_COMPARTMENT = os.environ['TF_VAR_compartment_ocid']&" config.py
+fi 
 
 # Models.yaml
 sed -i "s&us-chicago-1&$TF_VAR_region&" models.yaml
-sed -i "s&compartment_id: ocid1.compartment.oc1\.\..*$&compartment_id: $TF_VAR_compartment_ocid&" models.yaml
+# USE MODELS_YAML
+if [ "$TF_VAR_use_models_yaml" == "" ];
+  sed -i "s&compartment_id: ocid1.compartment.oc1\.\..*$&compartment_id: $TF_VAR_compartment_ocid&" models.yaml
+  
 sed -i "s&ocid1.generativeaiendpoint.oc1.us-chicago-1.*$&$TF_VAR_dac_endpoint_ocid&" models.yaml

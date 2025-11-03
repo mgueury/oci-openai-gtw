@@ -10,5 +10,4 @@ export DEFAULT_API_KEYS="##TF_VAR_default_api_keys##"
 
 # To replace in models.yaml
 export TF_VAR_dac_endpoint_ocid="##TF_VAR_dac_endpoint_ocid##"
-
-
+export TF_VAR_use_models_yaml="##TF_VAR_use_models_yaml##"
