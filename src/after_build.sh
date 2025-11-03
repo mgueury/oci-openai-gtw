@@ -20,7 +20,7 @@ echo "URLs" > $FILE_DONE
 append_done "-----------------------------------------------------------------------"
 append_done "OpenAI Gateway URLs:"
 append_done "- http://${BASTION_IP}/app/v1"
-append_done "- https://${APIGW_HOSTNAME}/app/v1"
+append_done "- https://${APIGW_HOSTNAME}/${TF_VAR_prefix}/app/v1"
 append_done
 append_done "APIKEY: $TF_VAR_default_api_keys"
 append_done "MODEL: dac (see models.yaml)"
