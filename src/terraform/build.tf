@@ -107,6 +107,7 @@ resource "null_resource" "build_deploy" {
   }
   depends_on = [
     oci_core_instance.starter_compute,
+    oci_apigateway_deployment.starter_apigw_deployment,
     tls_private_key.ssh_key,  
     null_resource.tf_env  
   ]
