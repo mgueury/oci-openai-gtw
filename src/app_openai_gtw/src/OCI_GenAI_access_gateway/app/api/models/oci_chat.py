@@ -39,6 +39,7 @@ class OCIGenAIModel(BaseChatModel):
         self.init_models()
 
     def init_models(self):
+        logger.info(f"SUPPORTED_OCIGENAI_CHAT_MODELS = {len(SUPPORTED_OCIGENAI_CHAT_MODELS)} models")
         if not SUPPORTED_OCIGENAI_CHAT_MODELS:
             list_models_response = self.list_models(retrive=True)
             for model in list_models_response:
