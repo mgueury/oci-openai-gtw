@@ -29,10 +29,11 @@ sed -i "s&AUTH_TYPE = \"API_KEY\"&AUTH_TYPE = \"INSTANCE_PRINCIPAL\"&" config.py
 sed -i '/^PORT =.*/i import os\n' config.py
 sed -i "s&REGION = .*&# REGION = os.environ['TF_VAR_region']&" config.py
 
-if [ "$TF_VAR_use_models_yaml" == "true" ];
+if [ "$TF_VAR_use_models_yaml" == "true" ]; then
   # OCI_COMPARTMENT = "" -> Use models.yaml
   sed -i "s&OCI_COMPARTMENT = \"ocid1.compartment.oc1..xxx\"&OCI_COMPARTMENT = ""&" config.py
 else
+  # Use the compartment to auto-discover the models
   sed -i "s&OCI_COMPARTMENT = \"ocid1.compartment.oc1..xxx\"&OCI_COMPARTMENT = os.environ['TF_VAR_compartment_ocid']&" config.py
 fi 
 
