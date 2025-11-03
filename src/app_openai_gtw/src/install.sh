@@ -40,7 +40,5 @@ fi
 # Models.yaml
 sed -i "s&us-chicago-1&$TF_VAR_region&" models.yaml
 # USE MODELS_YAML
-if [ "$TF_VAR_use_models_yaml" == "" ];
-  sed -i "s&compartment_id: ocid1.compartment.oc1\.\..*$&compartment_id: $TF_VAR_compartment_ocid&" models.yaml
-  
+sed -i "s&compartment_id: ocid1.compartment.oc1\.\..*$&compartment_id: $TF_VAR_compartment_ocid&" models.yaml 
 sed -i "s&ocid1.generativeaiendpoint.oc1.us-chicago-1.*$&$TF_VAR_dac_endpoint_ocid&" models.yaml
