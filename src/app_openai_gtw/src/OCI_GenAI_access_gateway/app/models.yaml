@@ -221,10 +221,10 @@
         description: "A smaller, faster version of embed-multilingual-v3.0. Almost as capable, but a lot faster. Supports multiple languages."
 
     dedicated:
-      - name: sandbox_generativeaiendpointllama3_3
-        provider: meta
+      - name: dac
+        provider: cohere
         endpoint: ocid1.generativeaiendpoint.oc1.us-chicago-1................
-        description: "Sandbox dedicated model description"
+        description: "DAC"
 
       - name: my-dedicated-model-name
         endpoint: ocid1.generativeaiendpoint.....  # endpoint ocid for dedicated model
