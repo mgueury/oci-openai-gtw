@@ -183,7 +183,8 @@ class ChatRequestAdapter:
             oci_chat_request.chat_history = chat_history
             oci_chat_request.preamble_override = preamble_override
             # logger.info( "--- oci_chat_request:" + pprint.pformat(oci_chat_request) )
-            oci_chat_request.max_tokens = 4000
+            if not oci_chat_request.max_tokens:
+                oci_chat_request.max_tokens = 4000
 
             if chat_request.tools:
                 oci_chat_request.tools = ToolAdapter.ToolsDefinitionAdapter.to_cohere(chat_request.tools)

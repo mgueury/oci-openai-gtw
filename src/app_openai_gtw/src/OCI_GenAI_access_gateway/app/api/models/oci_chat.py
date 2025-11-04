@@ -161,6 +161,7 @@ class OCIGenAIModel(BaseChatModel):
     def chat_stream(self, chat_request: ChatRequest) -> AsyncIterable[bytes]:
         """Default implementation for Chat Stream API"""
         logger.info( "--- chat_request:" + pprint.pformat(chat_request) )
+        logger.info( "--- SUPPORTED_OCIGENAI_CHAT_MODELS:" + pprint.pformat(SUPPORTED_OCIGENAI_CHAT_MODELS) )        
         response = self._invoke_genai(chat_request)
         if not response.data:
             raise HTTPException(status_code=500, detail="OCI AI API returned empty response")
