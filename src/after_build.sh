@@ -5,11 +5,6 @@ cd $ROOT_DIR
 
 . ./starter.sh env
 
-# Upload Sample Files
-sleep 5
-echo "https://${APIGW_HOSTNAME}/${TF_VAR_prefix}/index.html" > ../sample_files/website.crawler
-oci os object bulk-upload -ns $TF_VAR_namespace -bn ${TF_VAR_prefix}-public-bucket --src-dir ../sample_files --overwrite --content-type auto
-
 title "INSTALLATION DONE"
 echo
 # echo "(experimental) Cohere with Tools and GenAI Agent:"
@@ -23,7 +18,13 @@ append_done "- http://${BASTION_IP}/app/v1"
 append_done "- https://${APIGW_HOSTNAME}/${TF_VAR_prefix}/app/v1"
 append_done
 append_done "APIKEY: $TF_VAR_default_api_keys"
-append_done "MODEL: dac (see models.yaml)"
+append_done "MODEL: dac or cohere.command-latest (see models.yaml)"
 append_done
 append_done "Endpoint OCID: $TF_VAR_dac_endpoint_ocid"
 append_done 
+append_done "curl https://${APIGW_HOSTNAME}/${TF_VAR_prefix}/app/v1/completions \\"
+append_done "-H \"Content-Type: application/json\" \\"
+append_done "-H \"Authorization: Bearer $TF_VAR_db_password\" \\"
+append_done "-d '{\"model\": \"xxx_model_name_xxx\", \"prompt\": \"Who are you\", \"max_tokens\": 200}'"
+
+
